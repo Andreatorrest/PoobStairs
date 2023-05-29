@@ -18,6 +18,14 @@ public Color getcolor() {
 	return Color.decode("#FDF4F5");
 }
 
+@Override
+public int casillaespecial() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+
 }
 
 
