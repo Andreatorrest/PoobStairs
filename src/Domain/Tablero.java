@@ -17,10 +17,10 @@ import javax.swing.SwingConstants;
 public class Tablero {
 
 	   private Casilla[][] board;
-	    public int[][] tableroposicionesvisuales;
+	   public int[][] tableroposicionesvisuales;
 
 	   private  int tamaño;
-	   	private int especiales;
+	   private int especiales;
 	   	  	
 	   public Tablero(int tamaño, int casillaspeciales){
 		   this.tamaño=tamaño;
@@ -79,12 +79,39 @@ public class Tablero {
 			}
 	   }
 	   
+	   /**public void generarSerpientesEscaleras(int aparicion) {
+		   
+		   Double  numerocasillasespeciales =(double) (((double)aparicion)/100) * (double) (tamaño*tamaño);
+		   int numeroSerpEscaleras = (int) Math.round(numerocasillasespeciales);
+		   ArrayList<Casilla> casillas = obtenerCasillasNormales(aparicion, 1, tamaño*tamaño-1);
+		   
+		   for (int i = 0; i < (casillas.size()/2); i++) {
+			   
+			   Random random = new Random();
+			   int valor = random.nextInt(2) + 1;
+			   if(valor == 1) {
+				   
+				   Serpiente s = new Serpiente(casillas.get(i), );
+				   casillas.get(i).addSerpiente(s);
+				   
+			   }
+			   else {
+			   
+				   Escalera e = new Escalera();
+				   casillas.get(i).addEscalera(e);
+				   
+			   }
+			   
+		   }
+		   
+	   }**/
+	   
 	   public void añadircasillasespeciales(int porcentaje, int tamaño) {
 		   
-		    Double porcentajeEsp= (double) porcentaje;
+		    Double porcentajeEsp = (double) porcentaje;
 			Double  numerocasillasespeciales =(double) (porcentajeEsp/100) * (double) (tamaño*tamaño);
 			Casilla casilla;
-			int numerocasillas= (int) Math.round(numerocasillasespeciales);
+			int numerocasillas = (int) Math.round(numerocasillasespeciales);
        
 
 			int[] posicionesCEspeciales=generarNumerosAleatoriosSinRepeticiones(numerocasillas, 1, tamaño*tamaño-1);
@@ -113,6 +140,51 @@ public class Tablero {
 				}
 			}
 		   
+	   }
+	   
+	   /**
+	    * Obtiene un ArrayList de casillas normales paara las serpientes y escaleras
+	    * @param cantidad cantidad de casillas normales que se requiere
+	    * @param minimo valor minimo para generar las casilla aleatoria
+	    * @param maximo valor maximo para generar las casilla aleatoria
+	    * @return ArrayList de casillas normales
+	    */
+	   private ArrayList<Casilla> obtenerCasillasNormales(int cantidad, int minimo, int maximo) {
+		   
+		   ArrayList<Casilla> casillasSerpienteEscaleras = new ArrayList<>();
+		   int cantidadTotal = cantidad * 2;
+		   Casilla casillaAleatoria = obtenerCasillaNormal(minimo, maximo);
+
+		   while(cantidadTotal != 0 && !casillasSerpienteEscaleras.contains(casillaAleatoria)) {
+			 
+			   casillasSerpienteEscaleras.add(casillaAleatoria);
+			   cantidadTotal--;
+		   }
+		  
+		  return casillasSerpienteEscaleras;
+		   
+	   }
+	   
+	   /**
+	    * Obtiene una casilla normal aleatoria
+	    * @param minimo valor minimo para generar las casilla aleatoria
+	    * @param maximo valor maximo para generar las casilla aleatoria
+	    * @return casilla normal aleatoria
+	    */
+	   private Casilla obtenerCasillaNormal(int minimo, int maximo) {
+		   
+		   Random random = new Random();
+		   int numeroAleatorio = random.nextInt(maximo - minimo + 1) + minimo;
+		   int[] posicion = obtenervalorcfilacolumna(numeroAleatorio);
+		   
+		   while(!(board[posicion[0]][posicion[1]] instanceof CasillaNormal)) {
+			   
+			   numeroAleatorio = random.nextInt(maximo - minimo + 1) + minimo;
+			   posicion = obtenervalorcfilacolumna(numeroAleatorio);
+			   
+		   }
+		   
+		   return board[posicion[0]][posicion[1]];
 	   }
 	   
 	   public static int[] generarNumerosAleatoriosSinRepeticiones(int cantidad, int minimo, int maximo) {

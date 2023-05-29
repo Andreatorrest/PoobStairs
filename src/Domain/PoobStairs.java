@@ -39,9 +39,9 @@ public class PoobStairs {
         
     }
     
-    public void addTablero(int tamañoTablero, int casillasEspeciales) {
+    public void addTablero(int tamañoTablero, int casillasEspeciales, int aparicionSerpEscaleras) {
     	
-    	tablero = new Tablero (tamañoTablero,casillasEspeciales);
+    	tablero = new Tablero (tamañoTablero,casillasEspeciales, aparicionSerpEscaleras);
     	
     }
     
@@ -52,11 +52,13 @@ public class PoobStairs {
  	 
    }
    
-    public void jugar() {	   
+    public void jugar() {
+    	
  	   dado.tirar();
  	   int valor=getValorDado();
  	   
   	   if (turno==1) {
+  		   
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
  			
  			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {

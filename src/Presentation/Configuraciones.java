@@ -517,7 +517,7 @@ private void prepareActionsTablero() {
 						tableroGrande.setBackground(Color.decode("#BA90C6"));
 						tableroGrande1.setBackground(Color.decode("#BA90C6"));
 						continuar.setEnabled(true);
-						m = 8;
+						m = 7;
 						
 					}
 				}
@@ -537,7 +537,7 @@ private void prepareActionsTablero() {
 						tableroGrande.setBackground(Color.decode("#BA90C6"));
 						tableroGrande1.setBackground(Color.decode("#BA90C6"));
 						continuar.setEnabled(true);
-						m = 7;
+						m = 6;
 					}
 				}
 		});
@@ -556,7 +556,7 @@ private void prepareActionsTablero() {
 						tableroGrande.setBackground(Color.decode("#E8A0BF"));
 						tableroGrande1.setBackground(Color.decode("#E8A0BF"));
 						continuar.setEnabled(true);
-						m = 10;
+						m = 8;
 					}
 				}
 		});
@@ -594,7 +594,7 @@ private void prepareActionsTablero() {
 							tableroGrande.setBackground(Color.decode("#BA90C6"));
 							tableroGrande1.setBackground(Color.decode("#BA90C6"));
 							continuar.setEnabled(true);
-							m = 8;
+							m = 7;
 							
 						}
 					}
@@ -614,7 +614,7 @@ private void prepareActionsTablero() {
 							tableroGrande.setBackground(Color.decode("#BA90C6"));
 							tableroGrande1.setBackground(Color.decode("#BA90C6"));
 							continuar.setEnabled(true);
-							m = 7;
+							m = 6;
 							
 						}
 					}
@@ -634,7 +634,7 @@ private void prepareActionsTablero() {
 							tableroGrande.setBackground(Color.decode("#E8A0BF"));
 							tableroGrande1.setBackground(Color.decode("#E8A0BF"));
 							continuar.setEnabled(true);
-							m = 10;
+							m = 8;
 							
 						}
 					}

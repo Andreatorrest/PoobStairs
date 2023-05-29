@@ -158,7 +158,7 @@ public class PoobStairsGUI extends JFrame{
 		
 		//portada
 		fondo = new JLabel();
-		ImageIcon icon = new ImageIcon(getClass().getResource("/fondo.png")); 
+		ImageIcon icon = new ImageIcon(getClass().getResource("/fondo.jpg")); 
 		Image imagenEscalada = icon.getImage().getScaledInstance(dimension.width,dimension.height, Image.SCALE_SMOOTH);
 		ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada);
 		fondo.setIcon(imagenEscaladaIcono);
@@ -410,8 +410,6 @@ public class PoobStairsGUI extends JFrame{
 						numJugadores = 2;
 						principiante.setVisible(true);
 						aprendiz.setVisible(true);
-						
-						
 				    
 					}
 				}
@@ -743,7 +741,7 @@ private void elementosTablero(int tamaño) {
 	public void ficha1(int tamañotablero,String colorJ1) {
 		ImageIcon icon1 = new ImageIcon(getClass().getResource("/"+colorJ1+".png")); 
 
-	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
+	    Image imagenEscalada = icon1.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
 	     ficha1 = new JButton(imagenEscaladaIcono);
 	     ficha1.setContentAreaFilled(false);
@@ -756,7 +754,7 @@ private void elementosTablero(int tamaño) {
 	public void ficha2(int tamañotablero,String colorJ2) {
 		ImageIcon icon1 = new ImageIcon(getClass().getResource("/"+colorJ2+".png")); 
 
-	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
+	    Image imagenEscalada = icon1.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
 	     ficha2 = new JButton(imagenEscaladaIcono);
 	     ficha2.setContentAreaFilled(false);
