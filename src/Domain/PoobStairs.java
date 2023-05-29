@@ -2,6 +2,7 @@ package Domain;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -52,9 +53,18 @@ public class PoobStairs {
  	 
    }
    
+<<<<<<< HEAD
     public void jugar() {
     	
  	   dado.tirar();
+=======
+    public void tirardados() {
+    	 dado.tirar();
+    }
+    
+    public void jugar() {	   
+ 	  
+>>>>>>> 34cae2ac6483eb0a15aab9e5a8a494e95f7f574d
  	   int valor=getValorDado();
  	   
   	   if (turno==1) {
@@ -62,12 +72,15 @@ public class PoobStairs {
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
  			
  			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste"+ jugadores.get(0).getNombre()+"!");
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(0).getNombre()+"!");
+ 				
  			}
- 			
+ 		
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
+ 				
   			jugadores.get(0).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(0).getFichaJug().getCasilla();
+ 			casillasEspeciales( casillaActual, 0);
  			turno ++; 
  			}else {
  				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
@@ -78,13 +91,14 @@ public class PoobStairs {
    		    int posiblecasilla =jugadores.get(1).getFichaJug().getCasilla()+valor;
    		    
    			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste"+ jugadores.get(1).getNombre()+"!");
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(1).getNombre()+"!");
  			}
    		    
    		    
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
    		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
+ 			casillasEspeciales( casillaActual, 1);
  			turno= turno-1;
  			}else {
  				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
@@ -93,6 +107,29 @@ public class PoobStairs {
    	   } 
     }
     
+    
+    public void casillasEspeciales(int casilla,int turno) {
+    	int[] posiciones=obtenercasilla(casilla);
+    	Casilla[][] Casillas=tablero.arrayTablero();
+    	if (Casillas[posiciones[0]][posiciones[1]] instanceof CasillaMortal) { 
+    		
+    		jugadores.get(turno).getFichaJug().newCasilla(1);
+    		
+    		JOptionPane.showMessageDialog(null, "!Te devuelves al inicio del juego!" );
+    	}else {
+    		if (Casillas[posiciones[0]][posiciones[1]] instanceof CasillaSaltarina) {
+
+    			Random random = new Random();
+    			int valor = random.nextInt(6) + 1;
+    			
+        		jugadores.get(turno).getFichaJug().setCasilla(valor);
+        		
+        		JOptionPane.showMessageDialog(null, "!Avanzas "+valor+" Posiciones Genial!" );
+    			
+    		}
+    	}
+    	
+    }
     
  	 public  int[] obtenercasillaXY(int turno) {
  		 

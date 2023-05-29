@@ -38,6 +38,7 @@ public abstract class  Casilla {
 	
 	    public abstract Boolean activar();
 	    public abstract Color  getcolor();
+	    public abstract int  casillaespecial();
 
 	    
 	  

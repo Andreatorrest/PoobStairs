@@ -78,6 +78,9 @@ public class Tablero {
 			    }
 			}
 	   }
+	   public Casilla[][] arrayTablero() {
+		   return board;
+	   }
 	   
 	   /**public void generarSerpientesEscaleras(int aparicion) {
 		   
@@ -114,7 +117,7 @@ public class Tablero {
 			int numerocasillas = (int) Math.round(numerocasillasespeciales);
        
 
-			int[] posicionesCEspeciales=generarNumerosAleatoriosSinRepeticiones(numerocasillas, 1, tamaño*tamaño-1);
+			int[] posicionesCEspeciales=generarNumerosAleatoriosSinRepeticiones(numerocasillas, 2, tamaño*tamaño-1);
 			for (int i = 0; i < posicionesCEspeciales.length; i++) {
 				
 

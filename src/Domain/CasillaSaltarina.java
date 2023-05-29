@@ -18,4 +18,10 @@ public Color getcolor() {
 	return Color.green;
 }
 
+@Override
+public int casillaespecial() {
+	// TODO Auto-generated method stub
+	return 2;
+}
+
 }
