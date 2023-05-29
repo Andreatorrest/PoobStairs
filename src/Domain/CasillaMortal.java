@@ -22,5 +22,11 @@ public class CasillaMortal extends Casilla {
 		return Color.black;
 	}
 
+	@Override
+	public int casillaespecial() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	  
 }

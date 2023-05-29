@@ -673,8 +673,8 @@ private void elementosTablero(int tamaño) {
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(e.getSource() == dado) {
-						
-						programs.jugar();
+						  programs.tirardados();
+					
 						int tirada = programs.getValorDado();
 						
 						if(tirada == 1) {
@@ -713,23 +713,21 @@ private void elementosTablero(int tamaño) {
 							dado.setIcon(icon1);
 							
 						}
+						programs.jugar();
 						if (turno==1) {
 						 	  int[] posiciones= programs.obtenercasillaXY(turno);
 						 	  int posicionFila=posiciones[0];
 						 	  int posicionColumna =posiciones[1];
 						 	  casillas[posicionFila][posicionColumna].add(ficha1);
-						 	 
-					    	  
 							    repaint();
+							    
 							turno=turno+1;
 						}else {
 							 int[] posiciones= programs.obtenercasillaXY(turno);
 							  int posicionFila=posiciones[0];
 						 	  int posicionColumna =posiciones[1];
 						 	 casillas[posicionFila][posicionColumna].add(ficha2);
-						   
-					    
-							    repaint();
+							  repaint();
 
 						 	turno=1;
 						}
