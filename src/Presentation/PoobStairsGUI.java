@@ -75,6 +75,7 @@ public class PoobStairsGUI extends JFrame{
 
 	private JButton fichaaAprendiz;
 	private JButton fichaPrincipiante;
+	private int turno =1;
 
 	
 	private PoobStairsGUI() {
@@ -710,6 +711,27 @@ private void elementosTablero(int tamaño) {
 							dado.setIcon(icon1);
 							
 						}
+						if (turno==1) {
+						 	  int[] posiciones= programs.obtenercasillaXY(turno);
+						 	  int posicionFila=posiciones[0];
+						 	  int posicionColumna =posiciones[1];
+						 	  casillas[posicionFila][posicionColumna].add(ficha1);
+						 	 
+					    	  
+							    repaint();
+							turno=turno+1;
+						}else {
+							 int[] posiciones= programs.obtenercasillaXY(turno);
+							  int posicionFila=posiciones[0];
+						 	  int posicionColumna =posiciones[1];
+						 	 casillas[posicionFila][posicionColumna].add(ficha2);
+						   
+					    
+							    repaint();
+
+						 	turno=1;
+						}
+						
 						
 					}
 				}
@@ -746,11 +768,11 @@ private void elementosTablero(int tamaño) {
 
 	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
-	     fichaaAprendiz = new JButton(imagenEscaladaIcono);
-	     fichaaAprendiz.setContentAreaFilled(false);
-	     fichaaAprendiz.setOpaque(false);
-	     fichaaAprendiz.setBorderPainted(false);
-		casillas[tamañotablero-1][0].add(fichaaAprendiz);   
+	    ficha2 = new JButton(imagenEscaladaIcono);
+	    ficha2.setContentAreaFilled(false);
+	    ficha2.setOpaque(false);
+	    ficha2.setBorderPainted(false);
+		casillas[tamañotablero-1][0].add(ficha2);   
 	}
 	
 	public void fichaMaquinaprincipiante(int tamañotablero,String colorJ2) {
@@ -758,11 +780,11 @@ private void elementosTablero(int tamaño) {
 
 	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
-	     fichaPrincipiante = new JButton(imagenEscaladaIcono);
-	     fichaPrincipiante.setContentAreaFilled(false);
-	     fichaPrincipiante.setOpaque(false);
-	     fichaPrincipiante.setBorderPainted(false);
-		casillas[tamañotablero-1][0].add(fichaPrincipiante);   
+	    ficha2 = new JButton(imagenEscaladaIcono);
+	    ficha2.setContentAreaFilled(false);
+	    ficha2.setOpaque(false);
+	    ficha2.setBorderPainted(false);
+		casillas[tamañotablero-1][0].add(ficha2);   
 	}
 	
 	

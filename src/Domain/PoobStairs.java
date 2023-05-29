@@ -3,6 +3,8 @@ package Domain;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class PoobStairs {
 	
 	private Dado dado;
@@ -14,7 +16,8 @@ public class PoobStairs {
 	private int porcentajeEscalerasSerpientes;
     public ArrayList<Jugador> jugadores;
     private Tablero tablero;
-	
+    private int turno=1;
+
 	public PoobStairs() {
 		
     	jugadores = new ArrayList<>();
@@ -49,11 +52,53 @@ public class PoobStairs {
  	 
    }
    
-   public void jugar() {
-	   
-	   dado.tirar();
-	   
-   }
+    public void jugar() {	   
+ 	   dado.tirar();
+ 	   int valor=getValorDado();
+ 	   
+  	   if (turno==1) {
+ 			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
+ 			
+ 			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste"+ jugadores.get(0).getNombre()+"!");
+ 			}
+ 			
+ 			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
+  			jugadores.get(0).getFichaJug().setCasilla(valor); 
+ 			int casillaActual = jugadores.get(0).getFichaJug().getCasilla();
+ 			turno ++; 
+ 			}else {
+ 				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
+
+ 				turno ++; 
+ 			}
+   	   }else {
+   		    int posiblecasilla =jugadores.get(1).getFichaJug().getCasilla()+valor;
+   		    
+   			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste"+ jugadores.get(1).getNombre()+"!");
+ 			}
+   		    
+   		    
+ 			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
+   		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
+ 			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
+ 			turno= turno-1;
+ 			}else {
+ 				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
+ 				turno= turno-1;
+ 			}
+   	   } 
+    }
+    
+    
+ 	 public  int[] obtenercasillaXY(int turno) {
+ 		 
+ 	     int valor=jugadores.get(turno-1).getFichaJug().getCasilla();
+ 		 int[] posicion = new int[2];
+ 		 posicion = tablero.obtenervalorcfilacolumna(valor);
+ 		 return posicion;
+ 	}
 
 	public int getValorDado() {
 		
