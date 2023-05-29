@@ -157,8 +157,10 @@ public class PoobStairsGUI extends JFrame{
 		
 		//portada
 		fondo = new JLabel();
-		ImageIcon icon = new ImageIcon(getClass().getResource("/fondo.jpg")); 
-		fondo.setIcon(icon);
+		ImageIcon icon = new ImageIcon(getClass().getResource("/fondo.png")); 
+		Image imagenEscalada = icon.getImage().getScaledInstance(dimension.width,dimension.height, Image.SCALE_SMOOTH);
+		ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada);
+		fondo.setIcon(imagenEscaladaIcono);
 		fondo.setBounds(0, 0, dimension.width, dimension.height);
 		inicio.add(fondo);
 		
