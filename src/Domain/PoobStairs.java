@@ -52,19 +52,13 @@ public class PoobStairs {
  	   jugadores.add(jugador1);
  	 
    }
-   
-<<<<<<< HEAD
-    public void jugar() {
-    	
- 	   dado.tirar();
-=======
+    
     public void tirardados() {
     	 dado.tirar();
     }
     
     public void jugar() {	   
  	  
->>>>>>> 34cae2ac6483eb0a15aab9e5a8a494e95f7f574d
  	   int valor=getValorDado();
  	   
   	   if (turno==1) {
@@ -72,6 +66,7 @@ public class PoobStairs {
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
  			
  			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+ 				
  				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(0).getNombre()+"!");
  				
  			}
@@ -95,7 +90,7 @@ public class PoobStairs {
  			}
    		    
    		    
- 			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
+ 			if (posiblecasilla  <= tamañoTablero*tamañoTablero) {
    		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
  			casillasEspeciales( casillaActual, 1);
@@ -206,6 +201,12 @@ public class PoobStairs {
 	public int getCasillasEspeciales() {
 	
 		return casillasEspeciales;
+		
+	}
+
+	public int getEspecial() {
+
+		return porcentajeEscalerasSerpientes;
 		
 	}
 	
