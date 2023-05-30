@@ -18,6 +18,8 @@ public class PoobStairs {
     public ArrayList<Jugador> jugadores;
     private Tablero tablero;
     private int turno=1;
+    
+    private boolean haymodificadores;
 
 	public PoobStairs() {
 		
@@ -55,7 +57,45 @@ public class PoobStairs {
    
     public void tirardados() {
     	 dado.tirar();
+    	 dado.probabilidadModificadores(modificadores);
+    	 haymodificadores= dado.getmodificadores();
+			//JOptionPane.showMessageDialog(null, haymodificadores);
+
+
     }
+    
+    public boolean hayGanador(int turno) {
+    	boolean hayganador=false;
+    	
+        int posiblecasilla =jugadores.get(turno-1).getFichaJug().getCasilla();
+		    
+			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+				hayganador=true;
+			}
+    	return hayganador;
+    }
+    
+    public void cambioposicion(int turno) {
+    	 int varTemCasilla1= jugadores.get(0).getFichaJug().getCasilla();
+    	 int varTemCasilla2= jugadores.get(1).getFichaJug().getCasilla();
+    	 jugadores.get(0).getFichaJug().newCasilla(varTemCasilla2);
+    	 jugadores.get(1).getFichaJug().newCasilla(varTemCasilla1);
+    }
+    
+    public void bonificacion(int turno) {
+    	int fila=0;
+		int columna=0; 
+		  int casilla= jugadores.get(turno-1).getFichaJug().getCasilla();
+		  if (casilla +1 <=tamañoTablero*tamañoTablero) {
+			  jugadores.get(turno-1).getFichaJug().newCasilla(casilla+1);
+		  }
+		  }
+    
+    
+    public boolean haymodificadores() {
+    	return haymodificadores;
+    }
+    
     
     public void jugar() {	   
  	  
@@ -64,17 +104,15 @@ public class PoobStairs {
   	   if (turno==1) {
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
  			
- 			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(0).getNombre()+"!");
- 				
- 			}
+ 		
  		
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
  				
   			jugadores.get(0).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(0).getFichaJug().getCasilla();
- 			casillasEspeciales( casillaActual, 0);
+ 			//casillasEspeciales( casillaActual, 0);
  			turno ++; 
+ 			
  			}else {
  				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
 
@@ -82,17 +120,12 @@ public class PoobStairs {
  			}
    	   }else {
    		    int posiblecasilla =jugadores.get(1).getFichaJug().getCasilla()+valor;
-   		    
-   			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(1).getNombre()+"!");
- 			}
-   		    
-   		    
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
    		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
- 			casillasEspeciales( casillaActual, 1);
+ 			//casillasEspeciales( casillaActual, 1);
  			turno= turno-1;
+ 			
  			}else {
  				JOptionPane.showMessageDialog(null, "!No te alcanza para ganar!");
  				turno= turno-1;
@@ -100,30 +133,36 @@ public class PoobStairs {
    	   } 
     }
     
+
     
-    public void casillasEspeciales(int casilla,int turno) {
+    public void casillasEspeciales1(int turnos) {
+    	int turno=turnos-1;
+		int casilla = jugadores.get(turno).getFichaJug().getCasilla();	
+
     	int[] posiciones=obtenercasilla(casilla);
     	Casilla[][] Casillas=tablero.arrayTablero();
     	if (Casillas[posiciones[0]][posiciones[1]] instanceof CasillaMortal) { 
-    		
     		jugadores.get(turno).getFichaJug().newCasilla(1);
-    		
-    		JOptionPane.showMessageDialog(null, "!Te devuelves al inicio del juego!" );
+    		String name=jugadores.get(turno).getNombre();
+    		JOptionPane.showMessageDialog(null, "!Te devuelves al inicio del juego" +name+"!" );
     	}else {
     		if (Casillas[posiciones[0]][posiciones[1]] instanceof CasillaSaltarina) {
 
     			Random random = new Random();
     			int valor = random.nextInt(6) + 1;
-    			
         		jugadores.get(turno).getFichaJug().setCasilla(valor);
-        		
         		JOptionPane.showMessageDialog(null, "!Avanzas "+valor+" Posiciones Genial!" );
+        		String name=jugadores.get(turno).getNombre();
+        		JOptionPane.showMessageDialog(null,"!" +name+ " Avanzas "+valor+" Posiciones Genial!" );
+    			
     			
     		}
     	}
     	
     }
     
+    
+
  	 public  int[] obtenercasillaXY(int turno) {
  		 
  	     int valor=jugadores.get(turno-1).getFichaJug().getCasilla();

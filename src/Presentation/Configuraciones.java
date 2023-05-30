@@ -303,12 +303,12 @@ public class Configuraciones extends JFrame{
 		
 		
 		aparicionModificadores = new JComboBox<Integer>();
-		aparicionModificadores.addItem(0);
-		aparicionModificadores.addItem(5);
 		aparicionModificadores.addItem(10);
-		aparicionModificadores.addItem(15);
 		aparicionModificadores.addItem(20);
-		aparicionModificadores.addItem(25);
+		aparicionModificadores.addItem(30);
+		aparicionModificadores.addItem(50);
+		aparicionModificadores.addItem(90);
+		aparicionModificadores.addItem(100);
 		aparicionModificadores.setBounds(620, 70, 150, 30);
 		aparicionModificadores.setBackground(Color.decode("#C0DBEA"));
 		
