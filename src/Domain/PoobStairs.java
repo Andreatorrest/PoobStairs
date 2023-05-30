@@ -104,16 +104,6 @@ public class PoobStairs {
   	   if (turno==1) {
   		   
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
- 			
-<<<<<<< HEAD
- 			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(0).getNombre()+"!");
- 				
- 			}
-=======
- 		
->>>>>>> a26bf57efb5b181967c186c7069f9d0062471a8c
  		
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
  				
@@ -129,17 +119,8 @@ public class PoobStairs {
  			}
    	   }else {
    		    int posiblecasilla =jugadores.get(1).getFichaJug().getCasilla()+valor;
-<<<<<<< HEAD
-   		    
-   			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
- 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(1).getNombre()+"!");
- 			}
-   		    
-   		    
- 			if (posiblecasilla  <= tamañoTablero*tamañoTablero) {
-=======
+
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
->>>>>>> a26bf57efb5b181967c186c7069f9d0062471a8c
    		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
  			//casillasEspeciales( casillaActual, 1);
