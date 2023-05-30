@@ -447,7 +447,7 @@ public class PoobStairsGUI extends JFrame{
 									programs.setModificadores(newFrame.getmodificadores());
 									programs.setTransformaciones(newFrame.getTrasformaciones());
 									programs.setPorcentajeEspeciales(newFrame.getporcentajeSerpientesScaleras());
-									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales());
+									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales(), programs.getPorcentajeEspeciales());
 									
 									elementosTablero(programs.getSize());
 							        fondoTablero.add(tablero);
@@ -511,7 +511,7 @@ public class PoobStairsGUI extends JFrame{
 									programs.setModificadores(newFrame.getmodificadores());
 									programs.setTransformaciones(newFrame.getTrasformaciones());
 									programs.setPorcentajeEspeciales(newFrame.getporcentajeSerpientesScaleras());
-									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales());
+									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales(), programs.getPorcentajeEspeciales());
 									
 									programs.addplayer(nombreJ1, colorJ1);
 									ImageIcon icon1 = new ImageIcon(getClass().getResource("/"+colorJ1+".png")); 
