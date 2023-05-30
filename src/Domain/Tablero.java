@@ -5,6 +5,7 @@ import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -92,20 +93,29 @@ public class Tablero {
 		   int numeroSerpEscaleras = (int) Math.round(numerocasillasespeciales);
 		   ArrayList<Casilla> casillas = obtenerCasillasNormales(aparicion, 1, tamaño*tamaño-1);
 		   
+		   List cabeza = casillas.subList(0,(casillas.size()/2));
+		   List cola = casillas.subList((casillas.size()/2), casillas.size());
+		   
 		   for (int i = 0; i < (casillas.size()/2); i++) {
 			   
 			   Random random = new Random();
 			   int valor = random.nextInt(2) + 1;
 			   if(valor == 1) {
 				   
-				   Serpiente s = new Serpiente(casillas.get(i), );
-				   casillas.get(i).addSerpiente(s);
+				   if(cola.get(i)) {
+					   
+					   casillas.get(i).addSerpiente(cola.get(i));
 				   
+				   }
+				   else {
+					   
+					   
+					   
+				   }
 			   }
 			   else {
 			   
-				   Escalera e = new Escalera(casillas.get(i), casillas.get());
-				   casillas.get(i).addEscalera(e);
+				   casillas.get(i).addEscalera(casillas.get(i));
 				   
 			   }
 			   

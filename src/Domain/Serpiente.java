@@ -5,10 +5,10 @@ public class Serpiente implements Item{
 	private Casilla cola;
 	private Casilla cabeza;
 	
-	public Serpiente(Casilla cola, Casilla cabeza) {
+	public Serpiente(Casilla cola, Object object) {
 		
 		this.cola = cola;
-		this.cabeza = cabeza;
+		this.cabeza = object;
 		
 	}
 

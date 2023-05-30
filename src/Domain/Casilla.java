@@ -20,9 +20,9 @@ public abstract class  Casilla {
         return casilla;
     }
     
-    public void addSerpiente(Casilla cola) {
+    public void addSerpiente(Object object) {
     	
-    	item = new Serpiente(this, cola);
+    	item = new Serpiente(this, object);
     	
     }
     
