@@ -22,7 +22,8 @@ public class Tablero {
 	   private  int tamaño;
 	   private int especiales;
 	   	  	
-	   public Tablero(int tamaño, int casillaspeciales){
+	   public Tablero(int tamaño, int casillaspeciales, int aparicion){
+		   
 		   this.tamaño=tamaño;
 		   this.especiales=casillaspeciales;
 	        board = new Casilla[tamaño][tamaño];
@@ -30,9 +31,12 @@ public class Tablero {
 	        posicionesvisuales(tamaño);
 	        llenartablerodecasillas();
 	        if (casillaspeciales!=0) {
-		        añadircasillasespeciales(this.especiales, tamaño);
-		        }
+	        	
+	        	añadircasillasespeciales(this.especiales, tamaño);
+	        	
 	        }
+	        
+	   }
 	   
 	   private void posicionesvisuales (int tamaño) {
 			 int filas =  tamaño;
@@ -82,7 +86,7 @@ public class Tablero {
 		   return board;
 	   }
 	   
-	   /**public void generarSerpientesEscaleras(int aparicion) {
+	   public void generarSerpientesEscaleras(int aparicion) {
 		   
 		   Double  numerocasillasespeciales =(double) (((double)aparicion)/100) * (double) (tamaño*tamaño);
 		   int numeroSerpEscaleras = (int) Math.round(numerocasillasespeciales);
@@ -100,14 +104,14 @@ public class Tablero {
 			   }
 			   else {
 			   
-				   Escalera e = new Escalera();
+				   Escalera e = new Escalera(casillas.get(i), casillas.get());
 				   casillas.get(i).addEscalera(e);
 				   
 			   }
 			   
 		   }
 		   
-	   }**/
+	   }
 	   
 	   public void añadircasillasespeciales(int porcentaje, int tamaño) {
 		   
@@ -226,24 +230,28 @@ public class Tablero {
 
 	       return posicion;
 	   } 
-
 	   
-   public  int obtenervalorcasilla(int filas, int columnas) {
-		   
-	       int casilla =1;
-	        casilla= board[filas][columnas].getCasilla();
+	   public  int obtenervalorcasilla(int filas, int columnas) {
+			   
+	       int casilla = 1;
+	       casilla = board[filas][columnas].getCasilla();
 	       return casilla;
+	       
+	   }
+	   
+	   public  int obtenertipocasilla(int filas, int columnas) {
+		   
+	       int casilla = 1;
+	        casilla = board[filas][columnas].getCasilla();
+	       return casilla;
+	       
+	   }
+	   
+	   public  Color Color(int filas, int columnas) {
+		   
+	       Color color = board[filas][columnas].getcolor();
+	       return color;
+	       
 	   } 
-   public  int obtenertipocasilla(int filas, int columnas) {
-	   
-       int casilla =1;
-        casilla= board[filas][columnas].getCasilla();
-       return casilla;
-   } 
-   public  Color Color(int filas, int columnas) {
-	   
    
-        Color color= board[filas][columnas].getcolor();
-       return color;
-   } 
 }

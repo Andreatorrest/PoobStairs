@@ -54,12 +54,7 @@ public class PoobStairs {
  	   jugadores.add(jugador1);
  	 
    }
-   
-<<<<<<< HEAD
-    public void jugar() {
-    	
- 	   dado.tirar();
-=======
+    
     public void tirardados() {
     	 dado.tirar();
     	 dado.probabilidadModificadores(modificadores);
@@ -104,14 +99,21 @@ public class PoobStairs {
     
     public void jugar() {	   
  	  
->>>>>>> 34cae2ac6483eb0a15aab9e5a8a494e95f7f574d
  	   int valor=getValorDado();
  	   
   	   if (turno==1) {
   		   
  			int posiblecasilla =jugadores.get(0).getFichaJug().getCasilla()+valor;
  			
+<<<<<<< HEAD
+ 			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+ 				
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(0).getNombre()+"!");
+ 				
+ 			}
+=======
  		
+>>>>>>> a26bf57efb5b181967c186c7069f9d0062471a8c
  		
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
  				
@@ -127,7 +129,17 @@ public class PoobStairs {
  			}
    	   }else {
    		    int posiblecasilla =jugadores.get(1).getFichaJug().getCasilla()+valor;
+<<<<<<< HEAD
+   		    
+   			if(posiblecasilla==(tamañoTablero*tamañoTablero)) {
+ 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ jugadores.get(1).getNombre()+"!");
+ 			}
+   		    
+   		    
+ 			if (posiblecasilla  <= tamañoTablero*tamañoTablero) {
+=======
  			if (posiblecasilla  <=tamañoTablero*tamañoTablero) {
+>>>>>>> a26bf57efb5b181967c186c7069f9d0062471a8c
    		   	jugadores.get(1).getFichaJug().setCasilla(valor); 
  			int casillaActual = jugadores.get(1).getFichaJug().getCasilla();	
  			//casillasEspeciales( casillaActual, 1);
@@ -245,6 +257,12 @@ public class PoobStairs {
 	public int getCasillasEspeciales() {
 	
 		return casillasEspeciales;
+		
+	}
+
+	public int getEspecial() {
+
+		return porcentajeEscalerasSerpientes;
 		
 	}
 	
