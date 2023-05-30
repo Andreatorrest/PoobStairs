@@ -246,6 +246,11 @@ public class PoobStairs {
 		return porcentajeEscalerasSerpientes;
 		
 	}
+
+	public int getPorcentajeEspeciales() {
+		
+		return 0;
+	}
 	
 	
 	
