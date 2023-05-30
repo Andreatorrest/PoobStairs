@@ -76,6 +76,8 @@ public class PoobStairsGUI extends JFrame{
 	private JButton fichaaAprendiz;
 	private JButton fichaPrincipiante;
 	private int turno =1;
+	private String nombreJugador1;
+	private String nombreJugador2;
 
 	
 	private PoobStairsGUI() {
@@ -159,7 +161,9 @@ public class PoobStairsGUI extends JFrame{
 		//portada
 		fondo = new JLabel();
 		ImageIcon icon = new ImageIcon(getClass().getResource("/fondo.jpg")); 
-		fondo.setIcon(icon);
+		Image imagenEscalada = icon.getImage().getScaledInstance(dimension.width,dimension.height, Image.SCALE_SMOOTH);
+		ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada);
+		fondo.setIcon(imagenEscaladaIcono);
 		fondo.setBounds(0, 0, dimension.width, dimension.height);
 		inicio.add(fondo);
 		
@@ -346,11 +350,11 @@ public class PoobStairsGUI extends JFrame{
 								
 								String nombreJ1 = newFrame.getNombreJ1();
 								String colorJ1 = newFrame.getColorfichaj1();
-								
+								nombreJugador1=nombreJ1;
 								
 								String nombreJ2 = newFrame.getNombreJ2();
 								String colorJ2 = newFrame.getColorfichaj2();
-					
+								nombreJugador2 =nombreJ2;
 								if ((nombreJ2 != null && colorJ2 != null )){
 									
 									inicio.setEnabled(false);
@@ -363,7 +367,7 @@ public class PoobStairsGUI extends JFrame{
 									programs.setModificadores(newFrame.getmodificadores());
 									programs.setTransformaciones(newFrame.getTrasformaciones());
 									programs.setPorcentajeEspeciales(newFrame.getporcentajeSerpientesScaleras());
-									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales());
+									programs.addTablero(programs.getSize(), programs.getCasillasEspeciales(), programs.getEspecial());
 									
 									elementosTablero(programs.getSize());
 							        fondoTablero.add(tablero);
@@ -375,7 +379,7 @@ public class PoobStairsGUI extends JFrame{
 									j1.setIcon(icon1);
 									nombrej1.setText(nombreJ1);
 									
-									//informacion jugador2
+									//informacion jugador 2
 									programs.addplayer(nombreJ2, colorJ2);
 									ImageIcon icon2 = new ImageIcon(getClass().getResource("/"+colorJ2+".png")); 
 									j2.setIcon(icon2);
@@ -408,8 +412,6 @@ public class PoobStairsGUI extends JFrame{
 						numJugadores = 2;
 						principiante.setVisible(true);
 						aprendiz.setVisible(true);
-						
-						
 				    
 					}
 				}
@@ -665,14 +667,76 @@ private void elementosTablero(int tamaño) {
 		
 	}
 	
+
+
+private void randomModificador1() {
+	Random random = new Random();
+	 int  randomModificador = random.nextInt(2)+1; 
+	 int[] posicionesJ1 = new int[2];
+	 int[] posicionesJ2 = new int[2];
+	 int posicionFila;
+	 int posicionColumna;
+	 switch (randomModificador) {
+	 case 1:
+		 JOptionPane.showMessageDialog(null, "Se van a cambiar las posiciones ¡Cuidado!");
+		  programs.cambioposicion(turno);
+		  posicionesJ1= programs.obtenercasillaXY(1);
+	 	   posicionFila=posicionesJ1[0];
+	 	   posicionColumna =posicionesJ1[1];
+	 	  casillas[posicionFila][posicionColumna].add(ficha1);
+		  repaint();
+		    
+		    posicionesJ2= programs.obtenercasillaXY(2);
+		 	posicionFila=posicionesJ2[0];
+		 	posicionColumna =posicionesJ2[1];
+		 	casillas[posicionFila][posicionColumna].add(ficha2);
+			repaint();
+			JOptionPane.showMessageDialog(null, "se cambiaron las posiciones");
+	 break;
+	 
+	 case 2:
+		   if(turno==1) {
+			   int Bonificación = JOptionPane.showConfirmDialog(null, "¿Desea Avanzar una casilla adicional?", "Bonificación para: "+nombreJugador1, JOptionPane.YES_NO_OPTION);
+			   if (Bonificación == JOptionPane.YES_OPTION) {
+				    programs.bonificacion(turno);
+				    posicionesJ1= programs.obtenercasillaXY(1);
+				 	   posicionFila=posicionesJ1[0];
+				 	   posicionColumna =posicionesJ1[1];
+				 	  casillas[posicionFila][posicionColumna].add(ficha1);
+					    repaint();
+		    		JOptionPane.showMessageDialog(null, "Se avanzo una casilla adicional :D Bien hecho: "+nombreJugador1);
+
+			   }else {}
+		   }else {
+			   int Bonificación = JOptionPane.showConfirmDialog(null, "¿Desea Avanzar una casilla adicional?", "Bonificación para: "+nombreJugador2, JOptionPane.YES_NO_OPTION);
+			   if (Bonificación == JOptionPane.YES_OPTION) {
+				    programs.bonificacion(turno);
+				    posicionesJ2= programs.obtenercasillaXY(2);
+				 	   posicionFila=posicionesJ2[0];
+				 	   posicionColumna =posicionesJ2[1];
+				 	   casillas[posicionFila][posicionColumna].add(ficha2);
+					   repaint();
+		    		JOptionPane.showMessageDialog(null, "Se avanzo una casilla adicional :D Bien hecho: "+nombreJugador2);
+
+
+			   }else {}  
+		   }
+		 
+	 break;
+		 
+	 }
+}
+
 	private void prepareActionsJuego() {
 		
 		dado.addActionListener(
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(e.getSource() == dado) {
+						
+						
 						  programs.tirardados();
-					
+
 						int tirada = programs.getValorDado();
 						
 						if(tirada == 1) {
@@ -711,24 +775,59 @@ private void elementosTablero(int tamaño) {
 							dado.setIcon(icon1);
 							
 						}
+						
+						if (programs.haymodificadores()) {
+							randomModificador1();
+						}
+						
 						programs.jugar();
+						
 						if (turno==1) {
+								//movimientos normales
+							
 						 	  int[] posiciones= programs.obtenercasillaXY(turno);
 						 	  int posicionFila=posiciones[0];
 						 	  int posicionColumna =posiciones[1];
 						 	  casillas[posicionFila][posicionColumna].add(ficha1);
 							    repaint();
-							    
-							turno=turno+1;
+							  //movimientos casillasEspeciales
+								programs.casillasEspeciales1(1);
+						
+								int[] casillasespeciales= programs.obtenercasillaXY(turno);
+							 	int posicionFilas=casillasespeciales[0];
+							 	int posicionColumnas =casillasespeciales[1];
+							 	casillas[posicionFilas][posicionColumnas].add(ficha1);
+								repaint();
+								turno=turno+1;
+								
+							if (programs.hayGanador(1)) {
+				 				JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ nombreJugador1+"!");
+								System.exit(0);
+							}
+							
 						}else {
-							 int[] posiciones= programs.obtenercasillaXY(turno);
+							  int[] posiciones= programs.obtenercasillaXY(turno);
 							  int posicionFila=posiciones[0];
 						 	  int posicionColumna =posiciones[1];
-						 	 casillas[posicionFila][posicionColumna].add(ficha2);
+						 	  casillas[posicionFila][posicionColumna].add(ficha2);
 							  repaint();
+					
+						 	 programs.casillasEspeciales1(2);
+						
+							  int[] casillasespeciales= programs.obtenercasillaXY(turno);
+						 	  int posicionFilas=casillasespeciales[0];
+						 	  int posicionColumnas =casillasespeciales[1];
+						 	  casillas[posicionFilas][posicionColumnas].add(ficha2);
+							  repaint();
+							  turno=1;
+							if (programs.hayGanador(2)) {
+						
+							    JOptionPane.showMessageDialog(null, "!Felicidades Ganaste "+ nombreJugador2+"!");
+								System.exit(0);
 
-						 	turno=1;
+							}
 						}
+						
 						
 						
 					}
@@ -739,7 +838,7 @@ private void elementosTablero(int tamaño) {
 	public void ficha1(int tamañotablero,String colorJ1) {
 		ImageIcon icon1 = new ImageIcon(getClass().getResource("/"+colorJ1+".png")); 
 
-	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
+	    Image imagenEscalada = icon1.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
 	     ficha1 = new JButton(imagenEscaladaIcono);
 	     ficha1.setContentAreaFilled(false);
@@ -752,7 +851,7 @@ private void elementosTablero(int tamaño) {
 	public void ficha2(int tamañotablero,String colorJ2) {
 		ImageIcon icon1 = new ImageIcon(getClass().getResource("/"+colorJ2+".png")); 
 
-	    Image imagenEscalada = icon1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
+	    Image imagenEscalada = icon1.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH); // Escala la imagen al tamaño deseado
 	    ImageIcon imagenEscaladaIcono = new ImageIcon(imagenEscalada); // Crea un objeto ImageIcon con la imagen escalada
 	     ficha2 = new JButton(imagenEscaladaIcono);
 	     ficha2.setContentAreaFilled(false);

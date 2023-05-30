@@ -5,7 +5,7 @@ import java.util.Random;
 public class Dado {
 	
 	private int valor;
-	
+	private boolean modificador;
 	public Dado() {
 		
 		valor = 0;
@@ -30,5 +30,22 @@ public class Dado {
 		return valor;
 		
 	}
+    public boolean probabilidadModificadores(int modificadores) {
+
+ 		Random random = new Random();
+     	int numero = random.nextInt(100) + 1;
+     
+     	if (numero <= modificadores ){ 
+     		return modificador=true;
+     	}else {
+     		return modificador= false;
+     	}
+ 	}
+    
+    public boolean getmodificadores() {
+    	return modificador;
+    }
+    
+    
 	
 }
