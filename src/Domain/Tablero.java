@@ -19,6 +19,7 @@ public class Tablero {
 
 	   private Casilla[][] board;
 	   public int[][] tableroposicionesvisuales;
+	   public ArrayList<Item> serpienteseEscaleras;
 
 	   private  int tamaño;
 	   private int especiales;
@@ -27,6 +28,7 @@ public class Tablero {
 		   
 		   this.tamaño=tamaño;
 		   this.especiales=casillaspeciales;
+		   serpienteseEscaleras = new ArrayList<>();
 	        board = new Casilla[tamaño][tamaño];
 	        
 	        posicionesvisuales(tamaño);
@@ -40,7 +42,12 @@ public class Tablero {
 	        
 	   }
 	   
+	   /**
+	    * 
+	    * @param tamaño
+	    */
 	   private void posicionesvisuales (int tamaño) {
+		   
 			 int filas =  tamaño;
 		     int columnas = tamaño;
 
@@ -57,23 +64,29 @@ public class Tablero {
 		             }
 		         }
 		     }
+		     
 		    tableroposicionesvisuales = new int[filas][columnas];
-		     for (int i = 0; i < filas; i++) {
-		         for (int j = 0; j < columnas; j++) {
-		        	 tableroposicionesvisuales[i][j] = matriz[filas - 1 - i][j];
-		         }
-		     }
+		    
+		    for (int i = 0; i < filas; i++) {
+		    	
+		        for (int j = 0; j < columnas; j++) {
+		        	
+		        	tableroposicionesvisuales[i][j] = matriz[filas - 1 - i][j];
+		        	 
+		        }
+		    }
 		     
 		 
 		}
-	  
 	 
-	   
+	   /**
+	    * Rellena el tablero de casillas
+	    */
 	   public void llenartablerodecasillas() {
-		   
 		  		   
 		   for (int i = 0; i < board.length; i++) {
 			    for (int j = 0; j < board[i].length; j++) {
+			    	
 			    	int n=tableroposicionesvisuales[i][j];
 			    	Casilla casilla = new CasillaNormal();
 			    	casilla.setCasilla(n);
@@ -84,15 +97,20 @@ public class Tablero {
 			    }
 			}
 	   }
+	   
 	   public Casilla[][] arrayTablero() {
 		   return board;
 	   }
 	   
+	   /**
+	    * Genera las serpientes y las escaleras
+	    * @param aparicion porcentaje de aparicion de serpientes y escaleras
+	    */
 	   public void generarSerpientesEscaleras(int aparicion) {
 		   
 		   Double  numerocasillasespeciales =(double) (((double)aparicion)/100) * (double) (tamaño*tamaño);
 		   int numeroSerpEscaleras = (int) Math.round(numerocasillasespeciales);
-		   ArrayList<Casilla> casillas = obtenerCasillasNormales(aparicion, 1, tamaño*tamaño-1);
+		   ArrayList<Casilla> casillas = obtenerCasillasNormales(numeroSerpEscaleras, 1, (tamaño*tamaño)-1);
 		   
 		   List<Casilla> cabeza = casillas.subList(0,(casillas.size()/2));
 		   List<Casilla> cola = casillas.subList((casillas.size()/2), casillas.size());
@@ -106,12 +124,12 @@ public class Tablero {
 				   if(cola.get(i).getCasilla() > cabeza.get(i).getCasilla()) {
 					   
 					   cola.get(i).addSerpiente(cabeza.get(i));
-				   
+					   serpienteseEscaleras.add(cola.get(i).getItem());
 				   }
 				   else {
 					   
 					   cabeza.get(i).addSerpiente(cola.get(i));
-					   
+					   serpienteseEscaleras.add(cabeza.get(i).getItem());
 				   }
 			   }
 			   else {
@@ -119,11 +137,13 @@ public class Tablero {
 				   if(cola.get(i).getCasilla() > cabeza.get(i).getCasilla()) {
 					   
 					   cabeza.get(i).addEscalera(cola.get(i));
-				   
+					   serpienteseEscaleras.add(cabeza.get(i).getItem());
+					   
 				   }
 				   else {
 					   
 					   cola.get(i).addEscalera(cabeza.get(i));
+					   serpienteseEscaleras.add(cola.get(i).getItem());
 					   
 				   }
 				   
@@ -134,6 +154,11 @@ public class Tablero {
 		   
 	   }
 	   
+	   /**
+	    * Añade casillas especiales 
+	    * @param porcentaje porcentaje de aparicion de casillas especiales
+	    * @param tamaño tamaño del tablero
+	    */
 	   public void añadircasillasespeciales(int porcentaje, int tamaño) {
 		   
 		    Double porcentajeEsp = (double) porcentaje;
@@ -183,10 +208,14 @@ public class Tablero {
 		   int cantidadTotal = cantidad * 2;
 		   Casilla casillaAleatoria = obtenerCasillaNormal(minimo, maximo);
 
-		   while(cantidadTotal != 0 && !casillasSerpienteEscaleras.contains(casillaAleatoria)) {
+		   while(cantidadTotal != 0) {
 			 
-			   casillasSerpienteEscaleras.add(casillaAleatoria);
-			   cantidadTotal--;
+			   if(!casillasSerpienteEscaleras.contains(casillaAleatoria)) {
+				   casillasSerpienteEscaleras.add(casillaAleatoria);
+				   cantidadTotal--;
+				   
+			   }
+			   casillaAleatoria = obtenerCasillaNormal(minimo, maximo);
 		   }
 		  
 		  return casillasSerpienteEscaleras;
@@ -215,6 +244,13 @@ public class Tablero {
 		   return board[posicion[0]][posicion[1]];
 	   }
 	   
+	   /**
+	    * Genera un arreglo de numeros aleatorios sin repeticion
+	    * @param cantidad Cantidad de numeros aleatorios que se requiere
+	    * @param minimo minimo valor posible de los numeros
+	    * @param maximo maximo valor posible de los numeros
+	    * @return Array de numeros aleatorios sin repeticiones
+	    */
 	   public static int[] generarNumerosAleatoriosSinRepeticiones(int cantidad, int minimo, int maximo) {
 	        
 	        int[] numeros = new int[cantidad];
@@ -234,7 +270,11 @@ public class Tablero {
 	        return numeros;
 	    }
 		  
-	   
+	   /**
+	    * Obtiene la fila y la columna de una casilla con su valor
+	    * @param valor valor de la casilla
+	    * @return Array con la fila y la columna
+	    */
 	   public  int[] obtenervalorcfilacolumna(int valor) {
 		   
 	       int[] posicion = new int[2];
@@ -252,12 +292,24 @@ public class Tablero {
 	       return posicion;
 	   } 
 	   
+	   /**
+	    * Obtiene el valor de la casilla con su fila y su columna
+	    * @param filas fila de la casilla
+	    * @param columnas columna de la casilla
+	    * @return valor de la casilla
+	    */
 	   public  int obtenervalorcasilla(int filas, int columnas) {
 			   
 	       int casilla = 1;
 	       casilla = board[filas][columnas].getCasilla();
 	       return casilla;
 	       
+	   }
+	   
+	   public ArrayList<Item> getItems(){
+		   
+		   return serpienteseEscaleras;
+		   
 	   }
 	   
 	   public  int obtenertipocasilla(int filas, int columnas) {
@@ -268,6 +320,12 @@ public class Tablero {
 	       
 	   }
 	   
+	   /**
+	    * Obtiene el color de la casilla
+	    * @param filas fila de la casilla
+	    * @param columnas fila de la casilla
+	    * @return el color de la casilla
+	    */
 	   public  Color Color(int filas, int columnas) {
 		   
 	       Color color = board[filas][columnas].getcolor();

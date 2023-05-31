@@ -12,4 +12,15 @@ public class Escalera implements Item{
 		
 	}
 	
+	public Casilla getCola() {
+		
+		return cola;
+		
+	}
+	
+	public Casilla getCabeza() {
+		
+		return cabeza;
+		
+	}
 }
