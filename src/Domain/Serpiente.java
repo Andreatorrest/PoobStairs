@@ -11,5 +11,16 @@ public class Serpiente implements Item{
 		this.cabeza = cabeza;
 		
 	}
-
+	
+	public Casilla getCola() {
+		
+		return cola;
+		
+	}
+	
+	public Casilla getCabeza() {
+		
+		return cabeza;
+		
+	}
 }
